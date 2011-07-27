@@ -4,11 +4,14 @@ def square(x):
 	return x*x
 
 def repeat(fun,n):
-	print "n=",n
-#	return fun
-	return lambda(x): fun(x)  if n==1 else fun(repeat(fun,n-1))
+# using Z-combinator definition
+#	Z = lambda f: (lambda x: f(lambda *args: x(x)(*args)))(lambda x: f(lambda *args: x(x)(*args)))
+	#k = Z(lambda f,n: lambda x: fun(x) if n==1 else fun(f(n-1)))
+	k = lambda x: fun(x) if n==1 else fun(k(n-1))
+	return k
 
 print square(10)
-my_fun =  repeat(square,1)
+my_fun =  repeat(square,2)
 print "my function",my_fun
+
 print my_fun(5)
