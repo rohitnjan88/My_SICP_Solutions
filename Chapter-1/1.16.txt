@@ -22,3 +22,19 @@ Solution 1:
 
 Although it is done in iterative process, the number of multiplication is not exactly the same as fast-expt done in recursive manner.
 
+Oops !!! this can be simply written as the below one 
+Solution 2:
+
+#lang scheme
+(define (square x) (* x x)) 
+
+
+(define (even? n)
+     (if (= (remainder n 2) 0) true false))    
+
+(define (fast-expt-iter b n result)
+   (cond ((= n 1) result)      
+         ((even? n) (fast-expt-iter b  (/ n 2) (square result)))
+         (else (fast-expt-iter b (- n 1) (* b result)))))
+
+
